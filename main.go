@@ -23,7 +23,10 @@ func main() {
 
 	config.Connect()
 
-	app.Get("/test", handlers.GetTest)
+	app.Get("/articles", handlers.GetArticles)
+
+	app.Post("/signup", handlers.Signup)
+	app.Post("/login", handlers.Login)
 
 	// Démarrage
 	log.Fatal(app.Listen(":8081"))
