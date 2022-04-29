@@ -24,10 +24,34 @@ func main() {
 	config.Connect()
 
 	app.Get("/articles", handlers.GetArticles)
+	app.Get("/article/:id", handlers.GetArticle)
+
+	app.Get("/interPreview", handlers.GetPreviewInter)
+	app.Get("/natPreview", handlers.GetPreviewNat)
+	app.Get("/sportPreview", handlers.GetPreviewSport)
+
+	app.Get("/newsTicker", handlers.GetNewsTicker)
+	app.Get("/newsHighlights", handlers.GetNewsHighlights)
+
+	app.Get("search/:s", handlers.Search)
+
+	app.Get("inter/:n", handlers.Inter)
+	app.Get("nat/:n", handlers.Nat)
+	app.Get("sport/:n", handlers.Sport)
+
+	app.Get("like/:user/:article", handlers.GetLike)
+	app.Get("save/:user/:article", handlers.GetSave)
 
 	app.Post("/signup", handlers.Signup)
 	app.Post("/login", handlers.Login)
 
+	app.Post("/like", handlers.LikeArticle)
+	app.Post("/save", handlers.SaveArticle)
+
+	app.Delete("/unlike/:id", handlers.UnlikeArticle)
+	app.Delete("/unsave/:id", handlers.UnsaveArticle)
+
 	// Démarrage
+
 	log.Fatal(app.Listen(":8081"))
 }
