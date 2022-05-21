@@ -23,7 +23,6 @@ func Connect() error {
 	var err error
 	godotenv.Load(".env")
 	DATABASE_URI := fmt.Sprintf("%s:%s@tcp(localhost:%s)/%s?charset=utf8&parseTime=True&loc=Local", os.Getenv("USERNAME"), os.Getenv("PASSWORD"), os.Getenv("PORT"), os.Getenv("DATABASE"))
-
 	newLogger := logger.New(
 		log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
 		logger.Config{
@@ -50,6 +49,6 @@ func Connect() error {
 	Database.AutoMigrate(&entities.Like{})
 	Database.AutoMigrate(&entities.Dislike{})
 	Database.AutoMigrate(&entities.Save{})
-
+	Database.AutoMigrate(&entities.Meteo{})
 	return nil
 }

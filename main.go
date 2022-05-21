@@ -39,6 +39,8 @@ func main() {
 	app.Get("nat/:n", handlers.Nat)
 	app.Get("sport/:n", handlers.Sport)
 
+	app.Get("nbLikes/:id", handlers.GetNBLikes)
+
 	app.Get("like/:user/:article", handlers.GetLike)
 	app.Get("save/:user/:article", handlers.GetSave)
 
@@ -50,6 +52,20 @@ func main() {
 
 	app.Delete("/unlike/:id", handlers.UnlikeArticle)
 	app.Delete("/unsave/:id", handlers.UnsaveArticle)
+
+	app.Delete("/unsave/:user/:id", handlers.UnsaveArticleReturnSaved)
+	app.Delete("/unlike/:user/:id", handlers.UnlikeArticleReturnLiked)
+
+	app.Get("saved/:user", handlers.GetSaved)
+	app.Get("liked/:user", handlers.GetLiked)
+
+	app.Get("user/:id", handlers.GetUser)
+
+	app.Put("user/:id", handlers.UpdateUser)
+
+	app.Delete("user/:id", handlers.DeleteUser)
+
+	app.Get("meteo", handlers.GetMeteo)
 
 	// Démarrage
 

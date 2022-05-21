@@ -165,6 +165,21 @@ func UnlikeArticle(c *fiber.Ctx) error {
 	return c.Status(200).JSON(like)
 }
 
+func GetNBLikes(c *fiber.Ctx) error {
+	var n int64
+	var nb entities.NBLikes
+
+	articleID := c.Params("id")
+
+	config.Database.Model(&entities.Like{}).Where("article = ?", articleID).Count(&n)
+	nb.NB = uint(n)
+	idInt, _ := strconv.Atoi(articleID)
+
+	nb.ID = uint(idInt)
+
+	return c.Status(200).JSON(nb)
+}
+
 func GetSave(c *fiber.Ctx) error {
 	var save entities.Save
 
@@ -205,4 +220,60 @@ func UnsaveArticle(c *fiber.Ctx) error {
 	fmt.Println(save.ID)
 
 	return c.Status(200).JSON(save)
+}
+
+func UnsaveArticleReturnSaved(c *fiber.Ctx) error {
+	var save entities.Save
+	var saves []entities.Save
+	id := c.Params("id")
+	user := c.Params("user")
+	config.Database.First(&save, id)
+
+	if save.ID == 0 {
+		fmt.Println("---------------------------------------------")
+		return c.Status(200).JSON(save)
+	}
+
+	config.Database.Delete(&save)
+
+	config.Database.Where("user = ?", user).Find(&saves)
+
+	return c.Status(200).JSON(saves)
+}
+
+func GetSaved(c *fiber.Ctx) error {
+	var saves []entities.Save
+	userID := c.Params("user")
+
+	config.Database.Where("user = ?", userID).Find(&saves)
+
+	return c.Status(200).JSON(saves)
+}
+
+func GetLiked(c *fiber.Ctx) error {
+	var likes []entities.Like
+	userID := c.Params("user")
+
+	config.Database.Where("user = ?", userID).Find(&likes)
+
+	return c.Status(200).JSON(likes)
+}
+
+func UnlikeArticleReturnLiked(c *fiber.Ctx) error {
+	var like entities.Like
+	var likes []entities.Like
+	id := c.Params("id")
+	user := c.Params("user")
+	config.Database.First(&like, id)
+
+	if like.ID == 0 {
+		fmt.Println("---------------------------------------------")
+		return c.Status(200).JSON(like)
+	}
+
+	config.Database.Delete(&like)
+
+	config.Database.Where("user = ?", user).Find(&likes)
+
+	return c.Status(200).JSON(likes)
 }

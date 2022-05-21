@@ -20,9 +20,10 @@ type NewsHighlights struct {
 }
 
 type Like struct {
-	ID      uint `json:"id" gorm:"primaryKey;autoIncrement"`
-	Article uint `json:"article"`
-	User    uint `json:"user"`
+	ID      uint   `json:"id" gorm:"primaryKey;autoIncrement"`
+	Article uint   `json:"article"`
+	User    uint   `json:"user"`
+	Title   string `json:"title"`
 }
 type Dislike struct {
 	ID      uint `json:"id" gorm:"primaryKey;autoIncrement"`
@@ -31,7 +32,12 @@ type Dislike struct {
 }
 
 type Save struct {
-	ID      uint `json:"id" gorm:"primaryKey;autoIncrement"`
-	User    uint `json:"user"`
-	Article uint `json:"article"`
+	ID      uint   `json:"id" gorm:"primaryKey;autoIncrement"`
+	User    uint   `json:"user"`
+	Article uint   `json:"article"`
+	Title   string `json:"title"`
+}
+type NBLikes struct {
+	ID uint `json:"id"`
+	NB uint `json:"nb"`
 }
