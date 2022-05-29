@@ -2,13 +2,13 @@ package handlers
 
 import (
 	"fmt"
+	"het-ejdid-back/config"
+	"het-ejdid-back/entities"
 	"net/url"
 
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/hazem-jday/het-ejdid-back/config"
-	"github.com/hazem-jday/het-ejdid-back/entities"
 )
 
 func GetArticles(c *fiber.Ctx) error {

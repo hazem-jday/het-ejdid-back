@@ -1,8 +1,9 @@
 package handlers
 
 import (
+	"het-ejdid-back/entities"
+
 	"github.com/gofiber/fiber/v2"
-	"github.com/hazem-jday/het-ejdid-back/entities"
 )
 
 func GetTest(c *fiber.Ctx) error {

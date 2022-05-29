@@ -1,12 +1,12 @@
 package main
 
 import (
+	"het-ejdid-back/config"
+	"het-ejdid-back/handlers"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/hazem-jday/het-ejdid-back/config"
-	"github.com/hazem-jday/het-ejdid-back/handlers"
 )
 
 func main() {
@@ -69,5 +69,5 @@ func main() {
 
 	// Démarrage
 
-	log.Fatal(app.Listen(":8081"))
+	log.Fatal(app.Listen(":8080"))
 }

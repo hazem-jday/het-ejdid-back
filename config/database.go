@@ -1,14 +1,11 @@
-// @/config/database.go
 package config
 
 import (
 	"fmt"
+	"het-ejdid-back/entities"
 	"log"
 	"os"
 	"time"
-
-	"github.com/hazem-jday/het-ejdid-back/entities"
-	"github.com/joho/godotenv"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -21,8 +18,8 @@ var Database *gorm.DB
 //Connexion à la base
 func Connect() error {
 	var err error
-	godotenv.Load(".env")
-	DATABASE_URI := fmt.Sprintf("%s:%s@tcp(localhost:%s)/%s?charset=utf8&parseTime=True&loc=Local", os.Getenv("USERNAME"), os.Getenv("PASSWORD"), os.Getenv("PORT"), os.Getenv("DATABASE"))
+	fmt.Printf("%s %s %s %s", os.Getenv("MYSQL_USER"), os.Getenv("MYSQL_PASSWORD"), os.Getenv("MYSQL_PORT"), os.Getenv("MYSQL_DATABASE"))
+	DATABASE_URI := fmt.Sprintf("%s:%s@tcp(db:%s)/%s?charset=utf8&parseTime=True&loc=Local", os.Getenv("MYSQL_USER"), os.Getenv("MYSQL_PASSWORD"), os.Getenv("MYSQL_PORT"), os.Getenv("MYSQL_DATABASE"))
 	newLogger := logger.New(
 		log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
 		logger.Config{
